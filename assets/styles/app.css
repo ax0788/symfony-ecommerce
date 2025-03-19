@@ -1,3 +1,12 @@
 body {
     background-color: skyblue;
 }
+
+.login-form{
+width: 500px;
+
+}
+
+.h-100vh{
+height: 100vh;
+}
