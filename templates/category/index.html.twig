@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block body %}
+<div class="container m-4 w-75">
+<div class="row text-center d-flex flex-column">
+<div class="col">
+
+<h1>Categories</h1>
+
+</div>
+
+<div class="col">
+{% include './layouts/_flash_message.html.twig' %}
+
+<table class="table m-4 p-2">
+<tr>
+<th>id</th>
+<th>name</th>
+<th>action</th>
+</tr>
+{% for category in categories %}
+    <tr>
+<td>{{category.id}}</td>
+<td>{{category.name}}</td>
+<td>
+<a href="{{ path('app_category_update', {'id': category.id }) }}" class="btn btn-sm btn-info text-white fw-700">Edit</a>
+<a href="{{ path('app_category_delete', {'id': category.id }) }}" class="btn btn-sm btn-danger text-white fw-700">Delete</a>
+
+</td>
+</tr>
+{% else %}
+<div class="col">
+<p>No category avaiable, please <a href="{{ path('app_category_new') }}" class="btn btn-sm btn-success text-white fw-700">Add Category</a>
+.</p>
+</div>
+
+{% endfor %}
+</table>
+<a href="{{ path('app_category_new') }}" class="btn btn-md btn-success text-white fw-700">Add Category</a>
+</div>
+
+
+
+</div>
+
+</div>
+{% endblock %}
