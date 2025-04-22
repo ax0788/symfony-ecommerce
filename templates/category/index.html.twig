@@ -26,7 +26,7 @@
 <td>{{category.name}}</td>
 <td>
 <a href="{{ path('app_category_update', {'id': category.id }) }}" class="btn btn-sm btn-info text-white fw-700">Edit</a>
-<a href="{{ path('app_category_delete', {'id': category.id }) }}" class="btn btn-sm btn-danger text-white fw-700">Delete</a>
+<a onclick="return confirm('Are you sure you want to delete the category?')" href="{{ path('app_category_delete', {'id': category.id }) }}" class="btn btn-sm btn-danger text-white fw-700">Delete</a>
 
 </td>
 </tr>

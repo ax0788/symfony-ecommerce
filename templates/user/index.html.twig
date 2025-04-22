@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+<div class="container">
+<h1 class="m-4">Users</h1>
+
+{% include "layouts/_flash_message.html.twig" %}
+    <table class="table table-bordered">
+<tr>
+<th>id</th>
+<th>email</th>
+<th>first name</th>
+<th>last name</th>
+<th>role</th>
+<th>change role</th>
+</tr>
+
+{% for user in users %}
+    <tr>
+<td>{{user.id}}</td>
+<td>{{user.email}}</td>
+<td>{{user.firstName}}</td>
+<td>{{user.lastName}}</td>
+<td>
+
+{% if ('ROLE_ADMIN' in user.roles )  %}
+<span class="text-primary fw-bold">Admin</span>
+{% elseif ('ROLE_EDITOR' in user.roles ) %}
+ <span class="text-success fw-bold">Editor</span>
+{% else %}
+ <span class="text-dark fw-bold">User</span>
+{% endif %}
+
+</td>
+
+
+<td>
+
+{% if ('ROLE_ADMIN' in user.roles ) == false  %}
+
+
+{% if ('ROLE_EDITOR' in user.roles) == false %}
+
+<a href="{{path('app_user_to_editor', {'id': user.id})}}" class="btn btn-sm btn-outline-info">add editor role</a>
+{% else %}
+<a href="{{path('app_user_remove_editor', {'id': user.id})}}" class="btn btn-sm btn-danger mb-1">remove role</a>
+{% endif %}
+
+<a href="{{path('app_user_remove', {'id': user.id})}}" class="btn btn-sm btn-danger">delete</a>
+
+{% endif %}
+
+
+
+</td>
+</tr>
+{% endfor %}
+
+</table>
+</div>
+{% endblock %}

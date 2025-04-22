@@ -18,8 +18,13 @@
         {{ form_widget(registrationForm.firstName ,{'attr':{'class': 'form form-control m-3', 'placeholder': "First Name"}}) }}
         {{ form_widget(registrationForm.lastName ,{'attr':{'class': 'form form-control m-3', 'placeholder': "Last Name"}}) }}
 
-        {{ form_widget(registrationForm.Password,{'attr':{'class': 'form form-control m-3', 'placeholder': "Password"}}) }}
-        {{ form_widget(registrationForm.agreeTerms) }}
+    {{ form_widget(registrationForm.plainPassword.first, {
+    'attr': {'class': 'form form-control m-3', 'placeholder': 'Password'}
+    }) }}
+    
+    {{ form_widget(registrationForm.plainPassword.second, {
+    'attr': {'class': 'form form-control m-3', 'placeholder': 'Repeat Password'}
+    }) }}
 
         <button type="submit" class="btn btn-lg btn-primary w-100 mt-3">Register</button>
     {{ form_end(registrationForm) }}

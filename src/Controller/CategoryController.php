@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class CategoryController extends AbstractController
 {
-    #[Route('/admin/category', name: 'app_category')]
+    #[Route('/', name: 'app_category')]
     public function index(CategoryRepository $categoryRepository): Response
     {
 

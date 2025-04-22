@@ -23,22 +23,28 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
+            // Get plainPassword from the form directly
             $plainPassword = $form->get('plainPassword')->getData();
 
             // encode the plain password
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $plainPassword
+                )
+            );
 
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
-
             return $security->login($user, SecurityAuthenticator::class, 'main');
+
+            $this->addFlash('success', 'User Registered Successfully!');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form,
+            'registrationForm' => $form->createView(),
         ]);
     }
 }
